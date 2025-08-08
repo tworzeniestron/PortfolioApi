@@ -206,6 +206,22 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+# .NET
+bin/
+obj/
+
+# Angular
+ClientApp/node_modules/
+ClientApp/dist/
+
+# System
+.vscode/
+*.log
+
+# Build outputs
+*.dll
+*.exe
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
