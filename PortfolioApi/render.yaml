@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: PortfolioApi
+    env: docker
+    rootDir: PortfolioApi     # katalog, gdzie jest Dockerfile
+    plan: free              # darmowy plan Render (750 godzin/miesiąc)
+    autoDeploy: true        # automatyczne wdrażanie po każdym pushu
+    branch: main            # gałąź, z której Render ma budować aplikację
+    healthCheckPath: /health   # opcjonalne, jeśli chcesz endpoint zdrowia
+    envVars:
+      - key: DOTNET_RUNNING_IN_CONTAINER
+        value: true
