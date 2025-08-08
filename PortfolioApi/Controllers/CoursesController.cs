@@ -17,7 +17,7 @@ public class CoursesController : ControllerBase
                 "Kompletny kurs C# dla developerów .NET (Udemy)",
                 "Microsoft Azure - praktyczny kurs dla developerów .NET (Udemy)",
                 "Kurs Tworzenia Stron WWW w HTML i CSS od Podstaw do Eksperta (Udemy)",
-                "CCNAv7: Enterprise Networking, Security, and Automation (WWSI)"
+                "CCNAv7: Enterprise Networking, Security, and Automation  (WWSI)"
             }
         };
 
