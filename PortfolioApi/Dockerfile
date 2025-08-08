@@ -1,22 +1,27 @@
-# ===== Etap 1: Build Angular =====
-FROM node:20 AS build-angular
-WORKDIR /app
-COPY portfolio-client ./portfolio-client                # kopiujemy Angulara
-WORKDIR /app/portfolio-client
-RUN npm install
-RUN npm run build --prod
+# ================================
+# 1. Budowanie Angulara (frontend)
+# ================================
+FROM node:20 AS build-frontend                   # Etap builda Angulara
+WORKDIR /app                                      # Katalog roboczy
+COPY ../portfolio-client ./                       # Kopiujemy Angulara z folderu obok
+RUN npm install                                   # Instalujemy paczki
+RUN npm run build --prod                          # Budujemy frontend (produkcyjnie)
 
-# ===== Etap 2: Build .NET Backend =====
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-dotnet
-WORKDIR /src
-COPY PortfolioApi/ ./PortfolioApi/                      # kopiujemy backend
-COPY --from=build-angular /app/portfolio-client/dist/portfolio-client ./PortfolioApi/wwwroot
-WORKDIR /src/PortfolioApi
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish
+# ================================
+# 2. Budowanie .NET API (backend)
+# ================================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-backend  # Etap builda .NET
+WORKDIR /src                                            # Katalog roboczy
+COPY . ./                                                # Kopiujemy backend
+COPY --from=build-frontend /app/dist ./wwwroot          # Doklejamy build Angulara
+RUN dotnet restore                                       # Przywracamy NuGet
+RUN dotnet publish -c Release -o /app/publish            # Publikujemy aplikacjê
 
-# ===== Etap 3: Runtime =====
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+# ================================
+# 3. Finalny obraz (runtime)
+# ================================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final        # Runtime
 WORKDIR /app
-COPY --from=build-dotnet /app/publish .
-ENTRYPOINT ["dotnet", "PortfolioApi.dll"]
+COPY --from=build-backend /app/publish .                 # Kopiujemy opublikowane pliki
+EXPOSE 80                                                # Wystawiamy port
+ENTRYPOINT ["dotnet", "PortfolioApi.dll"]                # Start aplikacji
