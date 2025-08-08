@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<SpaRoot>../portfolio-client/</SpaRoot>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.13" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<Target Name="BuildClientApp" AfterTargets="Publish">
+		<Exec Command="npm install" WorkingDirectory="$(SpaRoot)" />
+		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(SpaRoot)" />
+		<Copy SourceFiles="$(SpaRoot)dist\**\*" DestinationFolder="wwwroot" SkipUnchangedFiles="true" />
+	</Target>
+
+</Project>
