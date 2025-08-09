@@ -1,6 +1,7 @@
 # ================================
 # 1. Build Angular frontend
 # ================================
+FROM node:20 AS build-frontend
 WORKDIR /app
 COPY portfolio-client/package*.json ./
 RUN npm install
