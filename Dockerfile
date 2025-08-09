@@ -1,8 +1,8 @@
 FROM node:20 AS build-frontend
 WORKDIR /app
-COPY ../../portfolio-client/package*.json ./
+COPY portfolio-client/package*.json ./
 RUN npm install
-COPY ../../portfolio-client/ ./
+COPY portfolio-client/ ./
 RUN npm run build --prod
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-backend
