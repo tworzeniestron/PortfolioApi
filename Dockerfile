@@ -7,7 +7,7 @@ RUN npm run build --prod
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-backend
 WORKDIR /src
-COPY ./*.csproj ./
+COPY *.csproj ./
 RUN dotnet restore
 COPY ./ ./
 COPY --from=build-frontend /app/dist ./wwwroot
