@@ -6,7 +6,7 @@ services:
     plan: free
     autoDeploy: true
     branch: main
-    #healthCheckPath: /health   # opcjonalne, jeśli chcesz endpoint zdrowia
+    #healthCheckPath: /health  # opcjonalne, jeśli chcesz endpoint zdrowia
     envVars:
       - key: DOTNET_RUNNING_IN_CONTAINER
         value: true
