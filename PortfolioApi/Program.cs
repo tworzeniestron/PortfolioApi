@@ -30,4 +30,7 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 app.UseCors("AllowAll");
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
+
 app.Run();

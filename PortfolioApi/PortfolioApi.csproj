@@ -12,10 +12,19 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 	</ItemGroup>
 
-	<Target Name="BuildClientApp" AfterTargets="Publish">
-		<Exec Command="npm install" WorkingDirectory="$(SpaRoot)" />
-		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(SpaRoot)" />
-		<Copy SourceFiles="$(SpaRoot)dist\**\*" DestinationFolder="wwwroot" SkipUnchangedFiles="true" />
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0" />
+	</ItemGroup>
+
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+		<Exec Command="npm install" WorkingDirectory="../portfolio-client/" />
+		<Exec Command="npm run build -- --configuration production" WorkingDirectory="../portfolio-client/" />
+		<RemoveDir Directories="wwwroot" />
+		<Copy SourceFiles="@(DistFiles)" DestinationFolder="wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
 	</Target>
+
+	<ItemGroup>
+		<DistFiles Include="../portfolio-client/dist/**" />
+	</ItemGroup>
 
 </Project>
