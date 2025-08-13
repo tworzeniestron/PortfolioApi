@@ -4,21 +4,21 @@
 
 # 1. Budujemy Angulara
 FROM node:20 AS nodebuild
-WORKDIR /src/PortfolioApi/portfolio-client
-COPY /PortfolioApi/portfolio-client/package*.json ./
+WORKDIR /src/portfolio-client
+COPY ./portfolio-client/package*.json ./
 RUN npm install
-COPY /PortfolioApi/portfolio-client/. .
+COPY ./portfolio-client/. .
 RUN npm run build -- --configuration production
 
 
 # 2. Budujemy backend .NET
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS dotnetbuild
-WORKDIR /src/PortfolioApi
-COPY /PortfolioApi/PortfolioApi/*.csproj ./PortfolioApi/
+WORKDIR /src
+COPY ./PortfolioApi/*.csproj ./PortfolioApi/
 RUN dotnet restore ./PortfolioApi/PortfolioApi.csproj
-COPY /PortfolioApi/PortfolioApi/. ./PortfolioApi/
+COPY ./PortfolioApi/. ./PortfolioApi/
 COPY --from=nodebuild /src/portfolio-client/dist ./PortfolioApi/wwwroot
-WORKDIR /src/PortfolioApi/PortfolioApi
+WORKDIR /src/PortfolioApi
 RUN dotnet publish -c Release -o /app/publish
 
 # =========================
