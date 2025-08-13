@@ -14,9 +14,9 @@ RUN npm run build -- --configuration production
 # 2. Budujemy backend .NET
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS dotnetbuild
 WORKDIR /src
-COPY PortfolioApi/*.csproj ./PortfolioApi/
-RUN dotnet restore PortfolioApi/PortfolioApi.csproj
-COPY PortfolioApi/. ./PortfolioApi/
+COPY ./PortfolioApi/*.csproj ./PortfolioApi/
+RUN dotnet restore ./PortfolioApi/PortfolioApi.csproj
+COPY ./PortfolioApi/. ./PortfolioApi/
 COPY --from=nodebuild /src/portfolio-client/dist ./PortfolioApi/wwwroot
 WORKDIR /src/PortfolioApi
 RUN dotnet publish -c Release -o /app/publish
