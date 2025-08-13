@@ -17,7 +17,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    ;
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -25,10 +24,10 @@ if (app.Environment.IsDevelopment())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
-app.UseCors("AllowAll");
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 app.Urls.Add($"http://*:{port}");
