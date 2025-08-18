@@ -12,4 +12,17 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 	</ItemGroup>
 
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+		<Exec Command="npm install" WorkingDirectory="$(ProjectDir)..\ClientApp" />
+		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(ProjectDir)..\ClientApp" />
+
+		<RemoveDir Directories="$(ProjectDir)wwwroot" />
+
+		<Copy SourceFiles="@(DistFiles)" DestinationFolder="$(ProjectDir)wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
+	</Target>
+
+	<ItemGroup>
+		<DistFiles Include="$(ProjectDir)..\ClientApp\dist\**\*" />
+	</ItemGroup>
+
 </Project>
