@@ -13,8 +13,8 @@
 	</ItemGroup>
 
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-		<Exec Command="npm install" WorkingDirectory="$(ProjectDir)..\ClientApp" />
-		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(ProjectDir)..\ClientApp" />
+		<Exec Command="npm install" WorkingDirectory="$(ProjectDir)..\portfolio-client" />
+		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(ProjectDir)..\portfolio-client" />
 
 		<RemoveDir Directories="$(ProjectDir)wwwroot" />
 
@@ -22,7 +22,7 @@
 	</Target>
 
 	<ItemGroup>
-		<DistFiles Include="$(ProjectDir)..\ClientApp\dist\**\*" />
+		<DistFiles Include="$(ProjectDir)..\portfolio-client\dist\**\*" />
 	</ItemGroup>
 
 </Project>
