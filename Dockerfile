@@ -15,7 +15,7 @@ RUN npm run build -- --configuration production
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS dotnetbuild
 WORKDIR /src
 COPY ./PortfolioApi/*.csproj ./PortfolioApi/
-RUN dotnet restore ./PortfolioApi/PortfolioApi.csproj
+RUN dotnet restore ./PortfolioApi/PortfolioApi.csproj --disable-parallel
 COPY ./PortfolioApi/. ./PortfolioApi/
 COPY --from=nodebuild /src/portfolio-client/dist ./PortfolioApi/wwwroot
 WORKDIR /src/PortfolioApi
