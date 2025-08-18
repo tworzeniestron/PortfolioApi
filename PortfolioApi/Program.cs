@@ -7,7 +7,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("https://portfolioapi-production-0bd2.up.railway.app/")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
