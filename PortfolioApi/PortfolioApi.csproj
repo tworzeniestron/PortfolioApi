@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<SpaRoot>../portfolio-client/</SpaRoot>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
@@ -10,19 +9,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.13" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-	</ItemGroup>
-
-	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
-		<Exec Command="npm install" WorkingDirectory="$(ProjectDir)..\portfolio-client" />
-		<Exec Command="npm run build -- --configuration production" WorkingDirectory="$(ProjectDir)..\portfolio-client" />
-
-		<RemoveDir Directories="$(ProjectDir)wwwroot" />
-
-		<Copy SourceFiles="@(DistFiles)" DestinationFolder="$(ProjectDir)wwwroot\%(RecursiveDir)" SkipUnchangedFiles="true" />
-	</Target>
-
-	<ItemGroup>
-		<DistFiles Include="$(ProjectDir)..\portfolio-client\dist\**\*" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0" />
 	</ItemGroup>
 
 </Project>
