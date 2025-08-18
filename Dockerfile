@@ -6,7 +6,7 @@
 FROM node:20 AS nodebuild
 WORKDIR /src/portfolio-client
 COPY ./portfolio-client/package*.json ./
-RUN npm install
+RUN npm ci --omit=dev
 COPY ./portfolio-client/. .
 RUN npm run build -- --configuration production
 
