@@ -1,0 +1,11 @@
+<svg width="260" height="80" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#1e1e2f" />
+
+    <text x="40" y="50" font-family="Segoe UI, sans-serif" font-size="20" fill="#00d8ff">
+        &lt;/&gt;
+    </text>
+
+    <text x="95" y="50" font-family="Segoe UI, sans-serif" font-size="20" fill="#ffffff">
+        Marki-IT
+    </text>
+</svg>
