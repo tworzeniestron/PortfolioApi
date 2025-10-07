@@ -1,0 +1,18 @@
+# Build the application
+Write-Host "🔧 Building the application..."
+dotnet build PortfolioApi.sln -c Release
+
+# Git commit & push
+Write-Host "📦 Committing changes to Git..."
+git add .
+git commit -m "Add login"
+git push origin main
+
+# Copy files to wwwroot
+Write-Host "📁 Copying files to wwwroot..."
+$source = "D:\PROJECTS\DEV\PortfolioApi\PortfolioApi\bin\Release\net8.0\publish"
+$destination = "D:\PROJECTS\DEV\PortfolioApi\PortfolioApi\wwwroot"
+Copy-Item -Path "$source\*" -Destination $destination -Recurse -Force
+
+Write-Host "✅ Deployment completed successfully."
+
