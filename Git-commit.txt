@@ -5,7 +5,7 @@ dotnet build PortfolioApi.sln -c Release
 # Git commit & push
 Write-Host "📦 Committing changes to Git..."
 git add .
-git commit -m "Add login"
+git commit -m "Fix courses"
 git push origin main
 
 # Copy files to wwwroot
